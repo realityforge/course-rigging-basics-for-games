@@ -1,0 +1,7 @@
+*.psd -text
+*.mel -text
+*.ma -text
+*.fbx -text
+*.sh text eol=lf
+.gitattributes text
+.gitignore text
