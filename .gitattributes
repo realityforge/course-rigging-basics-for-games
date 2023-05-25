@@ -3,5 +3,6 @@
 *.ma -text
 *.fbx -text
 *.sh text eol=lf
+*.obj text eol=lf
 .gitattributes text
 .gitignore text
