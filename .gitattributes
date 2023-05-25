@@ -6,3 +6,4 @@
 *.obj text eol=lf
 .gitattributes text
 .gitignore text
+*.tif -text
