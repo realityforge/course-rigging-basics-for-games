@@ -1,5 +1,4 @@
 import maya.cmds as cmds
-import maya.mel as mel
 from importlib import reload
 
 import realityforge.maya.basic_rigger as basic
@@ -16,10 +15,6 @@ for joint_name in cmds.ls(exactType="joint"):
         cmds.setAttr(f"{joint_name}.side", 1)
     elif "_r_" in joint_name:
         cmds.setAttr(f"{joint_name}.side", 2)
-
-# Rename the existing ik handles according to our "new" rules
-mel.eval('searchReplaceNames "arm_r_IK" "arm_r_ik_handle" "all"')
-mel.eval('searchReplaceNames "arm_l_IK" "arm_l_ik_handle" "all"')
 
 ik_chains = {
     "arm_l": ["shoulder_l", "elbow_l", "wrist_l"],
