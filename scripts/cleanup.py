@@ -25,7 +25,13 @@ ik_chains = {
     "arm_l": ["shoulder_l", "elbow_l", "wrist_l"],
     "arm_r": ["shoulder_r", "elbow_r", "wrist_r"]
 }
-rigging_settings = basic.RiggingSettings(ik_chains=ik_chains)
+
+rigging_settings = basic.RiggingSettings(ik_chains=ik_chains,
+                                         driver_joint_name_pattern="{name}_JDRV2",
+                                         ik_joint_name_pattern="{name}_IK_JDRV2",
+                                         fk_joint_name_pattern="{name}_FK_JDRV2",
+                                         offset_group_name_pattern="{name}_OFF_GRP2",
+                                         control_name_pattern="{name}_CTRL2")
 
 root_joint = "world_position_JNT"
 
