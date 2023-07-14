@@ -16,15 +16,17 @@ for joint_name in cmds.ls(exactType="joint"):
     elif "_r_" in joint_name:
         cmds.setAttr(f"{joint_name}.side", 2)
 
-ik_chains = {
-    "arm_l": ["shoulder_l", "elbow_l", "wrist_l"],
-    "arm_r": ["shoulder_r", "elbow_r", "wrist_r"]
-}
+ik_chains = [
+    basic.IkChain(name="arm_l", joints=["shoulder_l", "elbow_l", "wrist_l"], effector_name="hand_l"),
+    basic.IkChain(name="arm_r", joints=["shoulder_r", "elbow_r", "wrist_r"], effector_name="hand_r")
+]
 
 rigging_settings = basic.RiggingSettings(ik_chains=ik_chains,
+                                         effector_name_pattern="{name}_GRP2",
+                                         ik_system_name_pattern="{name}_IK_SYS2",
                                          driver_joint_name_pattern="{name}_JDRV2",
-                                         ik_joint_name_pattern="{name}_IK_JDRV2",
-                                         fk_joint_name_pattern="{name}_FK_JDRV2",
+                                         ik_joint_base_name_pattern="{name}_IK",
+                                         fk_joint_base_name_pattern="{name}_FK",
                                          offset_group_name_pattern="{name}_OFF_GRP2",
                                          control_name_pattern="{name}_CTRL2")
 
@@ -35,7 +37,6 @@ root_joint = "world_position_JNT"
 
 # Perform Autorig here
 basic.create_rig(root_joint, rigging_settings)
-
 
 # Copy controls from the old rig to the new rig
 for source_control_name in cmds.ls(exactType="transform"):
