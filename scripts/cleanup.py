@@ -1,5 +1,6 @@
 import maya.cmds as cmds
 from importlib import reload
+import traceback
 
 import realityforge.maya.basic_rigger as basic
 import realityforge.maya.rigging_tools as rigging_tools
@@ -36,10 +37,13 @@ root_joint = "world_position_JNT"
 # rigging_tools.analyze_joints_in_hierarchy(root_joint, "{name}_JNT")
 
 # Perform Autorig here
-basic.create_rig(root_joint, rigging_settings)
+try:
+    basic.create_rig(root_joint, rigging_settings)
 
-# Copy controls from the old rig to the new rig
-for source_control_name in cmds.ls(exactType="transform"):
-    if source_control_name.endswith("_CTRL"):
-        target_control_name = source_control_name + "2"
-        basic.copy_control(source_control_name, target_control_name, rigging_settings)
+    # Copy controls from the old rig to the new rig
+    for source_control_name in cmds.ls(exactType="transform"):
+        if source_control_name.endswith("_CTRL"):
+            target_control_name = source_control_name + "2"
+            basic.copy_control(source_control_name, target_control_name, rigging_settings)
+except:
+    traceback.print_exc()
