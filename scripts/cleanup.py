@@ -33,6 +33,8 @@ rigging_settings = basic.RiggingSettings(ik_chains=ik_chains,
 
 root_joint = "world_position_JNT"
 
+util.unlock_all_attributes(root_joint)
+
 # Verify skeleton is ready for rigging
 # rigging_tools.analyze_joints_in_hierarchy(root_joint, "{name}_JNT")
 
