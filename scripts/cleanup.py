@@ -18,12 +18,12 @@ for joint_name in cmds.ls(exactType="joint"):
         cmds.setAttr(f"{joint_name}.side", 2)
 
 ik_chains = [
-    basic.IkChain(name="arm_l", joints=["shoulder_l", "elbow_l", "wrist_l"], effector_name="hand_l"),
-    basic.IkChain(name="arm_r", joints=["shoulder_r", "elbow_r", "wrist_r"], effector_name="hand_r")
+    basic.IkChain(name="arm_l", joints=["shoulder_l", "elbow_l", "wrist_l"], end_name="hand_l"),
+    basic.IkChain(name="arm_r", joints=["shoulder_r", "elbow_r", "wrist_r"], end_name="hand_r")
 ]
 
 rigging_settings = basic.RiggingSettings(ik_chains=ik_chains,
-                                         effector_name_pattern="{name}_GRP2",
+                                         ik_end_name_pattern="{name}_GRP2",
                                          ik_system_name_pattern="{name}_IK_SYS2",
                                          driver_joint_name_pattern="{name}_JDRV2",
                                          ik_joint_base_name_pattern="{name}_IK",
