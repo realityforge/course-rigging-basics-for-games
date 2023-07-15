@@ -23,13 +23,8 @@ ik_chains = [
 ]
 
 rigging_settings = basic.RiggingSettings(ik_chains=ik_chains,
-                                         ik_end_name_pattern="{name}_GRP2",
-                                         ik_system_name_pattern="{name}_IK_SYS2",
-                                         driver_joint_name_pattern="{name}_JDRV2",
                                          ik_joint_base_name_pattern="{name}_IK",
-                                         fk_joint_base_name_pattern="{name}_FK",
-                                         offset_group_name_pattern="{name}_OFF_GRP2",
-                                         control_name_pattern="{name}_CTRL2")
+                                         fk_joint_base_name_pattern="{name}_FK")
 
 root_joint = "world_position_JNT"
 
