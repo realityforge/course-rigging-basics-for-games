@@ -64,7 +64,7 @@ rigging_settings = basic.RiggingSettings(ik_chains=ik_chains,
                                          ik_joint_base_name_pattern="{name}_IK",
                                          fk_joint_base_name_pattern="{name}_FK")
 
-root_joint = "world_position_JNT"
+root_joint = "root_JNT"
 
 util.unlock_all_attributes(root_joint)
 
