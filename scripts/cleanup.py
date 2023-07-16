@@ -77,10 +77,8 @@ try:
 
     # Copy controls from the left to the right
     for target_control_name in cmds.ls(exactType="transform"):
-        print(f"Testing ... {target_control_name}")
         if target_control_name.endswith("_CTRL") and "_r_" in target_control_name:
             source_control_name = target_control_name.replace("_r_", "_l_")
-            print(f"coping ... {target_control_name}")
             basic.copy_control(source_control_name, target_control_name, rigging_settings)
 except:
     traceback.print_exc()
