@@ -75,9 +75,6 @@ root_joint = "root_JNT"
 
 util.unlock_all_attributes(root_joint)
 
-# Verify skeleton is ready for rigging
-# rigging_tools.analyze_joints_in_hierarchy(root_joint, "{name}_JNT")
-
 # Perform Autorig here
 try:
     basic.create_rig(root_joint, rigging_settings)
