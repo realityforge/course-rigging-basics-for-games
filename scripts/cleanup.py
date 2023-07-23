@@ -28,13 +28,13 @@ control_template_mapping = {
     "chest": "ControlLibrary:chest_CTRL",
     "clavicle_l": "ControlLibrary:clavicle_l_CTRL",
     "cog": "ControlLibrary:cog_CTRL",
-    
+
     "shoulder_l_FK": "circle_tri_control_template",
     "elbow_l_FK": "circle_tri_control_template",
     "wrist_l_FK": "circle_tri_control_template",
 
     "head": "joint_control_template",
-    
+
     "hips": "ControlLibrary:hips_CTRL",
     "knee_l": "ControlLibrary:knee_l_CTRL",
 
@@ -60,14 +60,31 @@ control_template_mapping = {
 
     "neck": "ControlLibrary:neck_CTRL",
 
-
     "root": "ControlLibrary:root_CTRL",
     "spine_01": "ControlLibrary:spine_01_CTRL",
     "spine_02": "ControlLibrary:spine_02_CTRL",
     "world_offset": "ControlLibrary:world_offset_CTRL"
 }
+control_configurations = [
+    basic.ControllerConfig(name_pattern=".*",
+                           visibility_mode="default",
+                           translate_x=False,
+                           translate_y=False,
+                           translate_z=False,
+                           scale_x=False,
+                           scale_y=False,
+                           scale_z=False,
+                           priority=100),
+    basic.ControllerConfig(name_pattern="(global_CTRL|world_offset_CTRL|cog_CTRL)",
+                           visibility_mode="default",
+                           translate_x=True,
+                           translate_y=True,
+                           translate_z=True),
+    basic.ControllerConfig(name_pattern=".*_settings", color=(0, 0, 0))
+]
 rigging_settings = basic.RiggingSettings(ik_chains=ik_chains,
                                          control_template_mapping=control_template_mapping,
+                                         control_configurations=control_configurations,
                                          ik_joint_base_name_pattern="{name}_IK",
                                          fk_joint_base_name_pattern="{name}_FK")
 
