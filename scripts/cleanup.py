@@ -68,6 +68,7 @@ control_template_mapping = {
 control_configurations = [
     basic.ControllerConfig(name_pattern=".*",
                            visibility_mode="default",
+                           control_set="controlsSet",
                            translate_x=False,
                            translate_y=False,
                            translate_z=False,
