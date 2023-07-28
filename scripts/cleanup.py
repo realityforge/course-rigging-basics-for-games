@@ -21,50 +21,6 @@ ik_chains = [
     basic.IkChain(name="arm_l", joints=["shoulder_l", "elbow_l", "wrist_l"], end_name="hand_l"),
     basic.IkChain(name="arm_r", joints=["shoulder_r", "elbow_r", "wrist_r"], end_name="hand_r")
 ]
-control_template_mapping = {
-    "arm_l_IK_handle": "ControlLibrary:arm_l_IK_handle_CTRL",
-    "arm_l_IK_pole": "ControlLibrary:arm_l_IK_pole_CTRL",
-    "arm_l_settings": "ControlLibrary:arm_settings_l_CTRL",
-    "chest": "ControlLibrary:chest_CTRL",
-    "clavicle_l": "ControlLibrary:clavicle_l_CTRL",
-    "cog": "ControlLibrary:cog_CTRL",
-
-    "shoulder_l_FK": "circle_tri_control_template",
-    "elbow_l_FK": "circle_tri_control_template",
-    "wrist_l_FK": "circle_tri_control_template",
-
-    "head": "joint_control_template",
-
-    "hips": "ControlLibrary:hips_CTRL",
-    "knee_l": "ControlLibrary:knee_l_CTRL",
-
-    "index_l_01": "lolipop_control_template",
-    "index_l_02": "lolipop_control_template",
-    "index_l_03": "lolipop_control_template",
-    "index_l_04": "lolipop_control_template",
-    "middle_l_01": "lolipop_control_template",
-    "middle_l_02": "lolipop_control_template",
-    "middle_l_03": "lolipop_control_template",
-    "middle_l_04": "lolipop_control_template",
-    "pinky_l_01": "lolipop_control_template",
-    "pinky_l_02": "lolipop_control_template",
-    "pinky_l_03": "lolipop_control_template",
-    "pinky_l_04": "lolipop_control_template",
-    "ring_l_01": "lolipop_control_template",
-    "ring_l_02": "lolipop_control_template",
-    "ring_l_03": "lolipop_control_template",
-    "ring_l_04": "lolipop_control_template",
-    "thumb_l_01": "lolipop_control_template",
-    "thumb_l_02": "lolipop_control_template",
-    "thumb_l_03": "lolipop_control_template",
-
-    "neck": "ControlLibrary:neck_CTRL",
-
-    "root": "ControlLibrary:root_CTRL",
-    "spine_01": "ControlLibrary:spine_01_CTRL",
-    "spine_02": "ControlLibrary:spine_02_CTRL",
-    "world_offset": "ControlLibrary:world_offset_CTRL"
-}
 control_configurations = [
     basic.ControllerConfig(name_pattern=".*",
                            visibility_mode="default",
@@ -76,15 +32,32 @@ control_configurations = [
                            scale_y=False,
                            scale_z=False,
                            priority=100),
+    basic.ControllerConfig(name_pattern="global_CTRL", control_scale=3),
+    basic.ControllerConfig(name_pattern="world_offset_CTRL", control_scale=2.5),
     basic.ControllerConfig(name_pattern="(global_CTRL|world_offset_CTRL|cog_CTRL)",
                            visibility_mode="default",
                            translate_x=True,
                            translate_y=True,
                            translate_z=True),
-    basic.ControllerConfig(name_pattern=".*_settings", color=(0, 0, 0))
+    basic.ControllerConfig(name_pattern="(thumb_.*|ring_.*|pinky_*|middle_*|index_.*)",
+                           control_scale=0.4,
+                           control_template="lolipop_control_template"),
+    basic.ControllerConfig(name_pattern="(shoulder_.*|elbow_*|wrist_.*)",
+                           # control_scale=1,
+                           control_template="circle_tri_control_template"),
+    basic.ControllerConfig(name_pattern="(shoulder_.*|elbow_*|wrist_.*)",
+                           # control_scale=1,
+                           control_template="circle_tri_control_template"),
+
+    basic.ControllerConfig(name_pattern="cog_CTRL", control_template="ControlLibrary:cog_CTRL"),
+    basic.ControllerConfig(name_pattern="head_CTRL", control_template="joint_control_template"),
+    basic.ControllerConfig(name_pattern="arm_l_IK_handle_CTRL", control_template="ControlLibrary:arm_l_IK_handle_CTRL"),
+    basic.ControllerConfig(name_pattern="arm_l_PV_CTRL", control_template="ControlLibrary:arm_l_IK_pole_CTRL"),
+    basic.ControllerConfig(name_pattern="clavicle_l_CTRL", control_template="ControlLibrary:clavicle_l_CTRL"),
+    basic.ControllerConfig(name_pattern="knee_l_CTRL", control_template="ControlLibrary:knee_l_CTRL"),
+    basic.ControllerConfig(name_pattern="arm_settings_l_CTRL", control_template="ControlLibrary:arm_settings_l_CTRL")
 ]
 rigging_settings = basic.RiggingSettings(ik_chains=ik_chains,
-                                         control_template_mapping=control_template_mapping,
                                          control_configurations=control_configurations,
                                          ik_joint_base_name_pattern="{name}_IK",
                                          fk_joint_base_name_pattern="{name}_FK")
