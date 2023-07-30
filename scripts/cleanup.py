@@ -58,6 +58,7 @@ control_configurations = [
     basic.ControllerConfig(name_pattern="arm_settings_l_CTRL", control_template="ControlLibrary:arm_settings_l_CTRL")
 ]
 rigging_settings = basic.RiggingSettings(ik_chains=ik_chains,
+                                         use_control_hierarchy=True,
                                          control_configurations=control_configurations,
                                          ik_joint_base_name_pattern="{name}_IK",
                                          fk_joint_base_name_pattern="{name}_FK")
