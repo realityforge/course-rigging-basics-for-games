@@ -40,6 +40,7 @@ control_configurations = [
                            translate_x=True,
                            translate_y=True,
                            translate_z=True),
+    basic.ControllerConfig(name_pattern="arm_.*_settings_CTRL", control_template="settings_control_template"),
     basic.ControllerConfig(name_pattern="(thumb_.*|ring_.*|pinky_*|middle_*|index_.*)",
                            control_scale=0.4,
                            control_template="lolipop_control_template"),
@@ -55,8 +56,7 @@ control_configurations = [
     basic.ControllerConfig(name_pattern="arm_l_IK_handle_CTRL", control_template="ControlLibrary:arm_l_IK_handle_CTRL"),
     basic.ControllerConfig(name_pattern="arm_l_PV_CTRL", control_template="ControlLibrary:arm_l_IK_pole_CTRL"),
     basic.ControllerConfig(name_pattern="clavicle_l_CTRL", control_template="ControlLibrary:clavicle_l_CTRL"),
-    basic.ControllerConfig(name_pattern="knee_l_CTRL", control_template="ControlLibrary:knee_l_CTRL"),
-    basic.ControllerConfig(name_pattern="arm_settings_l_CTRL", control_template="ControlLibrary:arm_settings_l_CTRL")
+    basic.ControllerConfig(name_pattern="knee_l_CTRL", control_template="ControlLibrary:knee_l_CTRL")
 ]
 rigging_settings = basic.RiggingSettings(ik_chains=ik_chains,
                                          control_configurations=control_configurations,
