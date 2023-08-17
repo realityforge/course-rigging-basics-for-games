@@ -38,7 +38,7 @@ control_configurations = [
 
     basic.ControllerConfig("world_CTRL", control_scale=3, color=(1, 1, 0)),
     basic.ControllerConfig("world_offset_CTRL", control_scale=2.5, color=(1, 0.486, 0)),
-    basic.ControllerConfig("cog_CTRL", color=(1, 0.966, 0.608)),
+    basic.ControllerConfig("cog_CTRL", control_scale=.5, color=(1, 0.966, 0.608)),
     basic.ControllerConfig("(world_CTRL|world_offset_CTRL|cog_CTRL)",
                            visibility_mode="default",
                            translate_x=True,
