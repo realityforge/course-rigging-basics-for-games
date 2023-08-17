@@ -49,10 +49,8 @@ control_configurations = [
                            control_scale=0.4,
                            control_template="lolipop_control_template"),
     basic.ControllerConfig("(shoulder_.*|elbow_*|wrist_.*)",
-                           # control_scale=1,
                            control_template="circle_tri_control_template"),
     basic.ControllerConfig("(shoulder_.*|elbow_*|wrist_.*)",
-                           # control_scale=1,
                            control_template="circle_tri_control_template"),
 
     basic.ControllerConfig("cog_CTRL", control_template="ControlLibrary:cog_CTRL"),
