@@ -36,29 +36,31 @@ control_configurations = [
     basic.ControllerConfig(None, side_matcher="right", color=(0, 0, 1)),
     basic.ControllerConfig(None, side_matcher="center", color=(1, 1, 0)),
 
-    basic.ControllerConfig("global_CTRL", control_scale=3, color=(1, 1, 0)),
+    basic.ControllerConfig("world_CTRL", control_scale=3, color=(1, 1, 0)),
     basic.ControllerConfig("world_offset_CTRL", control_scale=2.5, color=(1, 0.486, 0)),
     basic.ControllerConfig("cog_CTRL", color=(1, 0.966, 0.608)),
-    basic.ControllerConfig("(global_CTRL|world_offset_CTRL|cog_CTRL)",
+    basic.ControllerConfig("(world_CTRL|world_offset_CTRL|cog_CTRL)",
                            visibility_mode="default",
                            translate_x=True,
                            translate_y=True,
                            translate_z=True),
-    basic.ControllerConfig("arm_.*_settings_CTRL", control_template="settings_control_template"),
+    basic.ControllerConfig("arm_.*_settings_CTRL", control_scale=.4, control_template="settings_control_template"),
     basic.ControllerConfig("(thumb_.*|ring_.*|pinky_*|middle_*|index_.*)",
-                           control_scale=0.4,
+                           control_scale=0.3,
                            control_template="lolipop_control_template"),
     basic.ControllerConfig("(shoulder_.*|elbow_*|wrist_.*)",
                            control_template="circle_tri_control_template"),
     basic.ControllerConfig("(shoulder_.*|elbow_*|wrist_.*)",
                            control_template="circle_tri_control_template"),
-
-    basic.ControllerConfig("cog_CTRL", control_template="ControlLibrary:cog_CTRL"),
     basic.ControllerConfig("head_CTRL", control_template="joint_control_template"),
-    basic.ControllerConfig("arm_l_IK_handle_CTRL", control_template="ControlLibrary:arm_l_IK_handle_CTRL"),
-    basic.ControllerConfig("arm_l_PV_CTRL", control_template="ControlLibrary:arm_l_IK_pole_CTRL"),
-    basic.ControllerConfig("clavicle_l_CTRL", control_template="ControlLibrary:clavicle_l_CTRL"),
-    basic.ControllerConfig("knee_l_CTRL", control_template="ControlLibrary:knee_l_CTRL")
+
+    basic.ControllerConfig("cog_CTRL", control_template="cog_control_template"),
+
+    basic.ControllerConfig("arm_.*_IK_handle_CTRL", control_scale=.4, control_template="prism_control_template"),
+    basic.ControllerConfig("arm_.*_PV_CTRL", control_scale=.3, control_template="pyramid_control_template"),
+    #    basic.ControllerConfig("clavicle_l_CTRL", control_template="ControlLibrary:clavicle_l_CTRL"),
+
+    basic.ControllerConfig("knee_.*_CTRL", control_scale=0.4, control_template="joint_control_template")
 ]
 rigging_settings = basic.RiggingSettings(ik_chains=ik_chains,
                                          control_configurations=control_configurations,
@@ -75,7 +77,8 @@ try:
 
     # Copy controls from the left to the right
     for target_control_name in cmds.ls(exactType="transform"):
-        if target_control_name.endswith("_CTRL") and "_r_" in target_control_name:
+        if target_control_name.endswith("_CTRL") and "_r_" in target_control_name and target_control_name not in [
+            "knee_r_CTRL", "clavicle_r_CTRL"]:
             source_control_name = target_control_name.replace("_r_", "_l_")
             basic.copy_control(source_control_name, target_control_name, rigging_settings)
 except:
